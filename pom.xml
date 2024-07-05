@@ -33,11 +33,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-actuator</artifactId> <!--告訴Maven包含Spring Actuator依賴項-->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId> <!--告訴Maven包含Spring Boot Web依賴項 -->
 		</dependency>
 
 		<dependency>
@@ -56,7 +56,7 @@
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<artifactId>spring-boot-maven-plugin</artifactId> <!--告訴 Maven 包含 Spring 特定的 Maven 插件，用于構建和部署 Spring Boot 應用程序-->
 				<configuration>
 					<excludes>
 						<exclude>
