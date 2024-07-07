@@ -1,5 +1,6 @@
 package jones.practice.springcloudmsp.controller;
 
+import java.util.Locale;
 import jones.practice.springcloudmsp.model.License;
 import jones.practice.springcloudmsp.service.LicenseService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,10 @@ public class LicenseController {
 
   @PostMapping
   public ResponseEntity<String> createLicense(
-      @PathVariable("organizationId") String organizationId, @RequestBody License license) {
-    return ResponseEntity.ok(licenseService.createLicense(license, organizationId));
+      @PathVariable("organizationId") String organizationId,
+      @RequestBody License license,
+      @RequestHeader(value = "Accept-Language", required = false) Locale locale) {
+    return ResponseEntity.ok(licenseService.createLicense(license, organizationId, locale));
   }
 
   @PutMapping
