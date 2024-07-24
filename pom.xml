@@ -10,7 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>jones.practice</groupId>
-	<artifactId>spring-cloud-msp</artifactId>
+	<artifactId>licensing-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-cloud-msp</name>
 	<description>spring-cloud-msp</description>
@@ -29,6 +29,7 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<docker.image.prefix>ostock</docker.image.prefix>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -62,6 +63,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId> <!--告訴 Maven 包含 Spring 特定的 Maven 插件，用于構建和部署 Spring Boot 應用程序-->
 				<configuration>
+					<layers>
+						<enabled>true</enabled>
+					</layers>
+					<image>
+						<name>${docker.image.prefix}/${project.artifactId}:${project.version}</name>
+					</image>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
@@ -70,6 +77,30 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- 這個plugin用於創建一個 Docker image 並將它發布到 Docker Hub -->
+			<!-- 因為spotify plugin 是以 x86 架構執行，不支援 Apple chip (Arm)-->
+<!--			<plugin>-->
+<!--				<groupId>com.spotify</groupId>-->
+<!--				<artifactId>dockerfile-maven-plugin</artifactId>-->
+<!--				<version>1.4.13</version>-->
+<!--				<configuration>-->
+<!--					<repository>${docker.image.prefix}/${project.artifactId}</repository>-->
+<!--					<tag>${project.version}</tag>-->
+<!--					<buildArgs>-->
+<!--						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>-->
+<!--					</buildArgs>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>default</id>-->
+<!--						<phase>install</phase>-->
+<!--						<goals>-->
+<!--							<goal>build</goal>-->
+<!--							<goal>push</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
